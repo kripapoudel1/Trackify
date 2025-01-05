@@ -207,3 +207,4 @@ D:\Application Development\Trackify\obj\Debug\net8.0-windows10.0.19041.0\win10-x
 D:\Application Development\Trackify\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\ProjectArchitectures.txt
 D:\Application Development\Trackify\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Data\users.Json
 D:\Application Development\Trackify\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Data\transactions.json
+D:\Application Development\Trackify\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Data\debts.json

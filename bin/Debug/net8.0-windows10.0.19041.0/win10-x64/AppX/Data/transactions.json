@@ -11,5 +11,18 @@
       "Yearly"
     ],
     "DueDate": "0001-01-01T00:00:00"
+  },
+  {
+    "TransactionId": 0,
+    "UserId": 1,
+    "Type": 0,
+    "Amount": 100,
+    "Date": "0001-01-01T00:00:00",
+    "Title": "School",
+    "Notes": "ds",
+    "Tags": [
+      "Yearly"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
   }
 ]

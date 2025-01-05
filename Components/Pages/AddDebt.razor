@@ -1,0 +1,153 @@
+﻿@page "/add-debts"
+@using Trackify.Models
+@inject JsonFileService JsonFileService
+@inject NavigationManager NavigationManager
+@inject ApplicationState ApplicationState
+
+<div class="content">
+    <h1>Add New Debt</h1>
+    <form class="transaction-form" @onsubmit="HandleFormSubmit">
+        <div class="form-group">
+            <label for="debtSource">Debt Source</label>
+            <input type="text" id="debtSource" class="input-field" @bind="Debt.DebtSource" placeholder="Enter Debt Source" required />
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" class="input-field" @bind="Debt.Amount" placeholder="Enter Amount" required />
+        </div>
+        <div class="form-group">
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate" class="input-field" @bind="Debt.DueDate" required />
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" class="input-field" @bind="Debt.Status">
+                <option value="@DebtStatus.Pending">Pending</option>
+                <option value="@DebtStatus.Cleared">Cleared</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-submit">Add Debt</button>
+    </form>
+</div>
+
+<style>
+    /* Content Layout */
+    .content {
+        padding: 30px;
+        background-color: #f5f5f5;
+        min-height: 100vh;
+    }
+
+        .content h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+    /* Form Styling */
+    .transaction-form {
+        max-width: 500px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        outline: none;
+        background-color: #dbe6e6;
+    }
+
+        .input-field:focus {
+            border-color: #76989c;
+        }
+
+    textarea.input-field {
+        resize: none;
+        height: 80px;
+    }
+
+    .btn-submit {
+        background-color: #76989c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+        .btn-submit:hover {
+            background-color: #5e7a7e;
+        }
+</style>
+
+@code {
+    private DebtModel Debt = new DebtModel();
+    private User? currentUser;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Set default due date to today
+        Debt.DueDate = DateTime.Today;
+
+        // Set the UserID from ApplicationState
+        Debt.UserId = ApplicationState.UserId ?? 0;
+
+        try
+        {
+            var users = await JsonFileService.ReadAsync<User>("users.json");
+            currentUser = users.FirstOrDefault(u => u.UserId == ApplicationState.UserId);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading user.json: {ex.Message}");
+        }
+    }
+
+    private async Task HandleFormSubmit()
+    {
+        try
+        {
+            var debts = await JsonFileService.ReadAsync<DebtModel>("debts.json");
+
+            // Set the DebtId
+            if (debts.Any())
+            {
+                Debt.DebtId = debts.Max(d => d.DebtId) + 1;
+            }
+            else
+            {
+                Debt.DebtId = 1;
+            }
+
+            debts.Add(Debt);
+            await JsonFileService.WriteAsync("debts.json", debts);
+
+            // Navigate to debts page
+            NavigationManager.NavigateTo("/view-debts");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving debt: {ex.Message}");
+        }
+    }
+}

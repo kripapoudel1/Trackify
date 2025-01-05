@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Application Development\Trackify\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-01-05T02:19:22.694</Modified>
+      <Modified>2025-01-05T05:04:36.120</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Application Development\Trackify\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2025-01-05T02:19:22.487</Modified>
+      <Modified>2025-01-05T05:04:35.964</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Trackify.runtimeconfig.json">
       <PackagePath>Trackify.runtimeconfig.json</PackagePath>
@@ -44,11 +44,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Trackify.dll">
       <PackagePath>Trackify.dll</PackagePath>
-      <Modified>2025-01-05T02:19:21.347</Modified>
+      <Modified>2025-01-05T05:04:35.710</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>Trackify.exe</PackagePath>
-      <Modified>2025-01-05T02:19:21.430</Modified>
+      <Modified>2025-01-05T05:04:35.710</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -302,9 +302,13 @@
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
       <Modified>2024-12-19T04:59:27.078</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Application Development\Trackify\Data\debts.json">
+      <PackagePath>Data\debts.json</PackagePath>
+      <Modified>2025-01-05T05:04:06.545</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\Data\transactions.json">
       <PackagePath>Data\transactions.json</PackagePath>
-      <Modified>2025-01-05T01:55:47.124</Modified>
+      <Modified>2025-01-05T02:19:50.237</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\Data\users.Json">
       <PackagePath>Data\users.Json</PackagePath>
