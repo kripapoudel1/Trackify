@@ -2,7 +2,7 @@
   {
     "TransactionId": 0,
     "UserId": 0,
-    "Type": 0,
+    "TransactionType": 0,
     "Amount": 1000,
     "Date": "0001-01-01T00:00:00",
     "Title": "School",
@@ -15,13 +15,39 @@
   {
     "TransactionId": 0,
     "UserId": 1,
-    "Type": 0,
+    "TransactionType": 0,
     "Amount": 100,
     "Date": "0001-01-01T00:00:00",
     "Title": "School",
     "Notes": "ds",
     "Tags": [
       "Yearly"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
+  },
+  {
+    "TransactionId": 0,
+    "UserId": 1,
+    "TransactionType": 0,
+    "Amount": 1000,
+    "Date": "2024-01-01T00:00:00",
+    "Title": "School",
+    "Notes": "school day",
+    "Tags": [
+      "Party"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
+  },
+  {
+    "TransactionId": 0,
+    "UserId": 1,
+    "TransactionType": 1,
+    "Amount": 200,
+    "Date": "2023-01-01T00:00:00",
+    "Title": "Fuel",
+    "Notes": "I have an oil",
+    "Tags": [
+      "Fuel"
     ],
     "DueDate": "0001-01-01T00:00:00"
   }

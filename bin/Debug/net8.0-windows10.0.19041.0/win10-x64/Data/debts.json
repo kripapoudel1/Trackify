@@ -1,5 +1,21 @@
 [
   {
+    "DebtId": 3,
+    "UserId": 1,
+    "DebtSource": "Ram",
+    "Amount": 5500,
+    "DueDate": "2024-12-29T00:00:00",
+    "Status": 1
+  },
+  {
+    "DebtId": 2,
+    "UserId": 1,
+    "DebtSource": "Friend",
+    "Amount": 1000,
+    "DueDate": "2025-01-01T00:00:00",
+    "Status": 0
+  },
+  {
     "DebtId": 1,
     "UserId": 1,
     "DebtSource": "Kripa",

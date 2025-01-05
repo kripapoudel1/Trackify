@@ -30,7 +30,7 @@
     <AppXManifest Include="D:\Application Development\Trackify\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-01-05T05:04:36.120</Modified>
+      <Modified>2025-01-05T06:33:02.315</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -44,11 +44,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Trackify.dll">
       <PackagePath>Trackify.dll</PackagePath>
-      <Modified>2025-01-05T05:04:35.710</Modified>
+      <Modified>2025-01-05T06:33:02.166</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>Trackify.exe</PackagePath>
-      <Modified>2025-01-05T05:04:35.710</Modified>
+      <Modified>2025-01-05T06:33:02.170</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -304,11 +304,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\Data\debts.json">
       <PackagePath>Data\debts.json</PackagePath>
-      <Modified>2025-01-05T05:04:06.545</Modified>
+      <Modified>2025-01-05T05:13:43.800</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\Data\transactions.json">
       <PackagePath>Data\transactions.json</PackagePath>
-      <Modified>2025-01-05T02:19:50.237</Modified>
+      <Modified>2025-01-05T06:16:25.743</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Application Development\Trackify\Data\users.Json">
       <PackagePath>Data\users.Json</PackagePath>

@@ -3,52 +3,142 @@
 @inject NavigationManager NavigationManager
 @inject ApplicationState ApplicationState
 
+<div class="container">
+    <div class="login-box">
+        <h1>TRACKIFY</h1>
+        <p>Welcome Back!</p>
+        <p class="tagline">"Budget smarter, live better."</p>
+        
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <p class="error-message">@errorMessage</p>
+        }
+
+        <form @onsubmit="HandleLogin">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="input-field" @bind="username" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" class="input-field" @bind="password" required />
+                    
+                </div>
+            </div>
+            <button type="submit" class="btn-login">Login</button>
+        </form>
+        
+        <p class="register-link">
+            Don't have an Account? <a href="/register">Register</a>
+        </p>
+    </div>
+</div>
+
 <style>
-    .form-container {
-        max-width: 400px;
-        margin: 5rem auto;
-        padding: 1.5rem;
-        border-radius: 8px;
-        background: #f9fafb;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* General Styling */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #dbe6e6;
+        font-family: Arial, sans-serif;
     }
 
-    .form-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
+    .login-box {
+        background-color: #76989c;
+        border-radius: 10px;
+        padding: 30px;
         text-align: center;
+        width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .form-label {
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    p {
+        margin: 5px 0;
+        color: #333;
+    }
+
+    .tagline {
+        font-size: 12px;
+        color: #6d6d6d;
+        font-style: italic;
+    }
+
+    /* Form Styling */
+    h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    label {
         display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #fff;
     }
 
-    .form-input {
+    .input-field {
         width: 100%;
-        padding: 0.5rem;
-        border: 1px solid #d1d5db;
-        border-radius: 4px;
-        margin-bottom: 1rem;
-        font-size: 1rem;
-    }
-
-    .form-button {
-        width: 100%;
-        padding: 0.75rem;
-        background: #4f46e5;
-        color: white;
+        padding: 10px;
         border: none;
-        border-radius: 4px;
-        font-size: 1rem;
+        border-radius: 5px;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .password-container {
+        position: relative;
+    }
+
+    .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
         cursor: pointer;
     }
 
-        .form-button:hover {
-            background: #4338ca;
-        }
+    /* Button Styling */
+    .btn-login {
+        background-color: #b5c9cc;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-login:hover {
+        background-color: #96aeb0;
+    }
+
+    /* Link Styling */
+    .register-link {
+        margin-top: 15px;
+        font-size: 12px;
+        color: #333;
+    }
+
+    .register-link a {
+        color: #000;
+        text-decoration: underline;
+    }
 
     .error-message {
         color: red;
@@ -56,51 +146,13 @@
         margin-bottom: 1rem;
         text-align: center;
     }
-
-    .register-link {
-        text-align: center;
-        margin-top: 1rem;
-        font-size: 0.9rem;
-    }
-
-        .register-link a {
-            color: #4f46e5;
-            text-decoration: none;
-        }
-
-            .register-link a:hover {
-                text-decoration: underline;
-            }
 </style>
-
-<div class="form-container">
-    <h1 class="form-title">Login</h1>
-    @if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <p class="error-message">@errorMessage</p>
-    }
-    <form @onsubmit="HandleLogin">
-        <div>
-            <label for="username" class="form-label">Username</label>
-            <input id="username" type="text" class="form-input" @bind="username" required />
-        </div>
-        <div>
-            <label for="password" class="form-label">Password</label>
-            <input id="password" type="password" class="form-input" @bind="password" required />
-        </div>
-        <button type="submit" class="form-button">Login</button>
-        <div class="register-link">
-            Don't have an account? <a href="/register">Register here</a>
-        </div>
-    </form>
-</div>
 
 @code {
     private string username = string.Empty;
     private string password = string.Empty;
     private string? errorMessage;
 
-    
     private async Task HandleLogin()
     {
         var users = await JsonFileService.ReadAsync<User>("users.json");
@@ -119,10 +171,10 @@
             ApplicationState.UserId = user.UserId;
             ApplicationState.Username = user.Username;
             ApplicationState.CurrencyType = user.CurrencyType;
-            ApplicationState.Balance = user.Balance; // Load user's balance
+            ApplicationState.Balance = user.Balance;
 
             // Redirect to dashboard
-            NavigationManager.NavigateTo("/");
+            NavigationManager.NavigateTo("/dashboard");
         }
         else
         {
@@ -130,4 +182,5 @@
         }
     }
 
+   
 }

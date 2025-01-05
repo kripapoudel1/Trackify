@@ -1,4 +1,7 @@
-﻿public enum TransactionType
+﻿
+namespace Trackify.TransactionModel
+{ 
+public enum TransactionType
 {
     Credit,
     Debit
@@ -16,3 +19,4 @@
         public List<string> Tags { get; set; } = new List<string>();
         public DateTime DueDate { get; set; }
     }
+}
