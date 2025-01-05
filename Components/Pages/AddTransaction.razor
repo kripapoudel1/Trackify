@@ -1,0 +1,191 @@
+﻿  @page "/add-transaction"
+  @inject JsonFileService JsonFileService
+  @inject NavigationManager NavigationManager
+  @inject ApplicationState ApplicationState
+
+  <div class="content">
+      <h1>Add New Transaction</h1>
+      <form class="transaction-form" @onsubmit="HandleFormSubmit">
+          <div class="form-group">
+              <label for="transactionType">Transaction Type</label>
+              <select id="transactionType" class="input-field" @bind="Transaction">
+                  <option value="@TransactionType.Credit">Credit</option>
+                  <option value="@TransactionType.Debit">Debit</option>
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="number" id="amount" class="input-field" @bind="Transaction.Amount" placeholder="Enter Amount" required />
+          </div>
+          <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" id="title" class="input-field" @bind="Transaction.Title" placeholder="Enter Title" required />
+          </div>
+          <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" class="input-field" @bind="Transaction.Date" required />
+          </div>
+          <div class="form-group">
+              <label for="tags">Tags</label>
+              <select id="tags" class="input-field" @bind="SelectedTag">
+                  <option value="">Select Tag</option>
+                  @foreach (var tag in Enum.GetValues<DefaultTags>())
+                  {
+                      <option value="@tag">@tag</option>
+                  }
+              </select>
+          </div>
+          <div class="form-group">
+              <label for="notes">Notes</label>
+              <textarea id="notes" class="input-field" @bind="Transaction.Notes" placeholder="Add Notes"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Add Transaction</button>
+      </form>
+  </div>
+
+  <style>
+      .content {
+          padding: 30px;
+          background-color: #f0f4f8;
+          max-width: 800px;
+          margin: auto;
+      }
+
+          .content h1 {
+              font-size: 28px;
+              margin-bottom: 25px;
+              color: #333;
+              text-align: center;
+          }
+
+      .transaction-form {
+          background-color: white;
+          padding: 25px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+          margin-bottom: 20px;
+      }
+
+      label {
+          display: block;
+          font-size: 14px;
+          font-weight: bold;
+          margin-bottom: 8px;
+          color: #444;
+      }
+
+      .input-field {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 14px;
+          background-color: #dbe6e6;
+          outline: none;
+          transition: border-color 0.3s;
+      }
+
+          .input-field:focus {
+              border-color: #76989c;
+          }
+
+      textarea.input-field {
+          resize: none;
+          height: 100px;
+      }
+
+      select.input-field {
+          background-color: #fff;
+      }
+
+      .btn-submit {
+          background-color: #76989c;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          padding: 12px 20px;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          width: 100%;
+          transition: background-color 0.3s, box-shadow 0.3s;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      }
+
+          .btn-submit:hover {
+              background-color: #5e7a7e;
+              box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          }
+  </style>
+
+
+
+  @code {
+      private Transaction Transaction = new Transaction();
+      private string SelectedTag = string.Empty;
+      private List<string> AvailableCurrencies = new List<string> { "USD", "EUR", "NPR", "INR" };
+      private string DefaultCurrency = "USD";
+      private User? currentUser;
+
+      protected override async Task OnInitializedAsync()
+      {
+          // Set default date to today
+          Transaction.Date = DateTime.Today;
+
+          // Set the UserID from ApplicationState
+          Transaction.UserId = ApplicationState.UserId ?? 0;
+
+          try
+          {
+              var users = await JsonFileService.ReadAsync<User>("users.json");
+              currentUser = users.FirstOrDefault(u => u.UserId == ApplicationState.UserId);
+              if (currentUser != null)
+              {
+                  DefaultCurrency = currentUser.PreferredCurrency;
+              }
+          }
+          catch (Exception ex)
+          {
+              Console.WriteLine($"Error loading user.json: {ex.Message}");
+          }
+      }
+
+      private async Task HandleFormSubmit()
+      {
+          if (!string.IsNullOrEmpty(SelectedTag))
+          {
+              Transaction.Tags.Add(SelectedTag);
+          }
+
+          try
+          {
+              var transactions = await JsonFileService.ReadAsync<Transaction>("transactions.json");
+
+              // Set the TransactionId
+              if (transactions.Any())
+              {
+                  Transaction.TransactionId = transactions.Max(t => t.TransactionId) + 1;
+              }
+              else
+              {
+                  Transaction.TransactionId = 1;
+              }
+
+              transactions.Add(Transaction);
+              await JsonFileService.WriteAsync("transactions.json", transactions);
+
+              // Navigate to transactions page
+              NavigationManager.NavigateTo("/transactions");
+          }
+          catch (Exception ex)
+          {
+              Console.WriteLine($"Error saving transaction: {ex.Message}");
+          }
+      }
+  }
+
+

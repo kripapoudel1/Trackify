@@ -1,0 +1,15 @@
+[
+  {
+    "TransactionId": 0,
+    "UserId": 0,
+    "Type": 0,
+    "Amount": 1000,
+    "Date": "0001-01-01T00:00:00",
+    "Title": "School",
+    "Notes": "note",
+    "Tags": [
+      "Yearly"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
+  }
+]

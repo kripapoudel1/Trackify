@@ -15,9 +15,11 @@ namespace Trackify
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddSingleton<JsonFileService>();
+            builder.Services.AddSingleton<ApplicationState>();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
 

@@ -1,0 +1,143 @@
+﻿@page "/register"
+@inject JsonFileService JsonFileService
+@inject NavigationManager NavigationManager
+
+<style>
+    .form-container {
+        max-width: 400px;
+        margin: 5rem auto;
+        padding: 1.5rem;
+        border-radius: 8px;
+        background: #f9fafb;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+
+    .form-button {
+        width: 100%;
+        padding: 0.75rem;
+        background: #4f46e5;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .form-button:hover {
+        background: #4338ca;
+    }
+
+    .success-message {
+        color: green;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+</style>
+
+<div class="form-container">
+    <h1 class="form-title">Register</h1>
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <p class="error-message">@errorMessage</p>
+    }
+    @if (isRegistered)
+    {
+        <p class="success-message">User registered successfully! Redirecting to login...</p>
+    }
+    else
+    {
+        <form @onsubmit="HandleRegister">
+            <div>
+                <label for="username" class="form-label">Username</label>
+                <input id="username" type="text" class="form-input" @bind="username" required />
+            </div>
+            <div>
+                <label for="password" class="form-label">Password</label>
+                <input id="password" type="password" class="form-input" @bind="password" required />
+            </div>
+            <div>
+                <label for="currency" class="form-label">Preferred Currency</label>
+                <select id="currency" class="form-input" @bind="currency" required>
+                    <option value="" disabled selected>Select currency</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                </select>
+            </div>
+            <button type="submit" class="form-button">Register</button>
+        </form>
+        <div>
+            Don't have an account? <a href="/login">Register here</a>
+        </div>
+    }
+</div>
+
+@code {
+    private string username = string.Empty;
+    private string password = string.Empty;
+    private string currency = string.Empty;
+    private string? errorMessage;
+    private bool isRegistered = false;
+
+    private async Task HandleRegister()
+    {
+        var users = await JsonFileService.ReadAsync<User>("users.json");
+
+        // Check if the username already exists
+        if (users.Any(u => u.Username == username))
+        {
+            errorMessage = "Username already exists.";
+            return;
+        }
+
+        // Create a new user
+        var newUser = new User
+            {
+                UserId = users.Count > 0 ? users.Max(u => u.UserId) + 1 : 1,
+                Username = username,
+                Password = password, // Ideally hash this in production
+                CurrencyType = currency
+            };
+
+        // Add the new user to the list and save it
+        users.Add(newUser);
+        await JsonFileService.WriteAsync("users.json", users);
+
+        isRegistered = true;
+
+        // Redirect to login after a delay
+        await Task.Delay(2000);
+        NavigationManager.NavigateTo("/login");
+    }
+}
