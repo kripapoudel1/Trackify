@@ -11,7 +11,7 @@
         }
         else
         {
-            @if (routeData.PageType == typeof(Login) || routeData.PageType == typeof(Register))
+            @if (routeData.PageType == typeof(Login))
             {
                 <RouteView RouteData="@routeData" DefaultLayout="@null" />
             }

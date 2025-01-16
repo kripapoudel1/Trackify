@@ -16,7 +16,7 @@ public enum TransactionType
         public DateTime Date { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Notes { get; set; } = string.Empty;
-        public List<string> Tags { get; set; } = new List<string>();
+        public List<string> Tags { get; set; } = new List<string>(); //todo
         public DateTime DueDate { get; set; }
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Trackify")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+fc131f192633e5daeb8c9a152d326bf8e124dd1f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+e3811a18cd871c12513426f2cccb46666f7fde27")]
 [assembly: System.Reflection.AssemblyProductAttribute("Trackify")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Trackify")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

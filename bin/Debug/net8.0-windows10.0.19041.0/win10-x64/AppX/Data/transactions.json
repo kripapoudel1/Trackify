@@ -50,5 +50,83 @@
       "Fuel"
     ],
     "DueDate": "0001-01-01T00:00:00"
+  },
+  {
+    "TransactionId": 0,
+    "UserId": 1,
+    "TransactionType": 0,
+    "Amount": 60000,
+    "Date": "2025-01-01T00:00:00",
+    "Title": "Salary",
+    "Notes": "Salary Credited",
+    "Tags": [
+      "Monthly"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
+  },
+  {
+    "TransactionId": 0,
+    "UserId": 1,
+    "TransactionType": 1,
+    "Amount": 1000,
+    "Date": "0001-01-02T00:00:00",
+    "Title": "Fuel",
+    "Notes": "Fuel",
+    "Tags": [
+      "Fuel"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
+  },
+  {
+    "TransactionId": 0,
+    "UserId": 1,
+    "TransactionType": 0,
+    "Amount": 5000,
+    "Date": "0001-01-01T00:00:00",
+    "Title": "friend",
+    "Notes": "credited from friend\n",
+    "Tags": [
+      "Party"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
+  },
+  {
+    "TransactionId": 0,
+    "UserId": 1,
+    "TransactionType": 0,
+    "Amount": 10000,
+    "Date": "0038-09-18T00:00:00",
+    "Title": "rahul",
+    "Notes": "money ",
+    "Tags": [
+      "Food"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
+  },
+  {
+    "TransactionId": 0,
+    "UserId": 1,
+    "TransactionType": 1,
+    "Amount": 10000,
+    "Date": "0001-01-01T00:00:00",
+    "Title": "raaam",
+    "Notes": "rent",
+    "Tags": [
+      "Rent"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
+  },
+  {
+    "TransactionId": 0,
+    "UserId": 1,
+    "TransactionType": 1,
+    "Amount": 70000,
+    "Date": "0001-01-01T00:00:00",
+    "Title": "yu",
+    "Notes": "",
+    "Tags": [
+      "Miscellaneous"
+    ],
+    "DueDate": "0001-01-01T00:00:00"
   }
 ]
